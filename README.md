@@ -118,6 +118,11 @@ while using the app are kept in memory for the current session and reset when
 the app restarts. Connect a database when you are ready to keep permanent shop
 records.
 
+## 🤝 Contributing
+
+Issues and improvements are welcome. Please open an issue to discuss a larger
+change before submitting it.
+
 ---
 
 <div align="center">
