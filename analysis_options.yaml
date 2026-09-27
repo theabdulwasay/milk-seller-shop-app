@@ -1,0 +1,8 @@
+analyzer:
+  exclude:
+    - build/**
+    - dartsdk-windows-x64-release/**
+    - flutter/**
+    - flutter_windows_3.47.5-stable/**
+    - web/**
+include: package:flutter_lints/flutter.yaml
