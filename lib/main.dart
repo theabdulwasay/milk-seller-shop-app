@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'auth_screens.dart';
+
 void main() {
   runApp(const MilkSellerApp());
 }
@@ -106,7 +108,9 @@ class MilkSellerApp extends StatelessWidget {
               const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
         ),
       ),
-      home: const ShopHomePage(),
+      home: WelcomePage(
+        dashboardBuilder: (_) => const ShopHomePage(),
+      ),
     );
   }
 }
@@ -651,8 +655,8 @@ class _ShopHomePageState extends State<ShopHomePage> {
     final weekOrders = _sales
         .where((sale) => DateTime.now().difference(sale.date).inDays < 7)
         .length;
-    final maxDay = List<double>.generate(7, _dailySales)
-        .fold<double>(0, (highest, amount) => amount > highest ? amount : highest);
+    final maxDay = List<double>.generate(7, _dailySales).fold<double>(
+        0, (highest, amount) => amount > highest ? amount : highest);
 
     return _pageContent(
       children: [
@@ -742,8 +746,15 @@ class _ShopHomePageState extends State<ShopHomePage> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              const ['M', 'T', 'W', 'T', 'F', 'S', 'S'][
-                                  date.weekday - 1],
+                              const [
+                                'M',
+                                'T',
+                                'W',
+                                'T',
+                                'F',
+                                'S',
+                                'S'
+                              ][date.weekday - 1],
                               style: const TextStyle(
                                 color: _muted,
                                 fontSize: 11,
@@ -769,7 +780,8 @@ class _ShopHomePageState extends State<ShopHomePage> {
               children: [
                 _summaryRow('Paid orders', money(_paidTotal), _green),
                 const Divider(height: 24),
-                _summaryRow('Pending payments', money(_dueTotal), Colors.orange),
+                _summaryRow(
+                    'Pending payments', money(_dueTotal), Colors.orange),
               ],
             ),
           ),
@@ -821,13 +833,13 @@ class _ShopHomePageState extends State<ShopHomePage> {
                 ? 2
                 : 1;
         const spacing = 12.0;
-        final width = (constraints.maxWidth - spacing * (columns - 1)) / columns;
+        final width =
+            (constraints.maxWidth - spacing * (columns - 1)) / columns;
         return Wrap(
           spacing: spacing,
           runSpacing: spacing,
-          children: cards
-              .map((card) => SizedBox(width: width, child: card))
-              .toList(),
+          children:
+              cards.map((card) => SizedBox(width: width, child: card)).toList(),
         );
       },
     );
